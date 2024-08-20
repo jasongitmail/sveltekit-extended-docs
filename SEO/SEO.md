@@ -11,7 +11,7 @@ How to set up SEO tags & Open Graph metadata on a SvelteKit site.
 - Add [meta.ts](+meta.ts) within `src/lib/`. (Optionally, update `formatTitle()` to your preferred
   title format; the default is `<title> · <siteName>`.)
 - Add [app.html](app.html) within `src/`. (This version simplifies the default and moves items into
-  `+layout.svelte` for better organized and because `app.html` is never minified by SvelteKit and
+  `+layout.svelte` for better organization and because `app.html` is never minified by SvelteKit and
   will ship any comments you make in it.)
 - Within each route's load function, include a `meta` property containing at least `title` and
   `description` (usually just those two) and any other properties you want to override the defaults
