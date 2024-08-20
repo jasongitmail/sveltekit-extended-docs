@@ -1,11 +1,8 @@
 <script lang="ts">
 // Layout used for public pages.
-// - I moved the entire head from `app.html` into this file because comments and whitespace are
-//   removed from this file during a build, but not app.html.
 
 let { children } = $props();
 
-import { afterNavigate, beforeNavigate } from "$app/navigation";
 import { page } from "$app/stores";
 import {
   PUBLIC_DEFAULT_DESCRIPTION,
@@ -13,7 +10,7 @@ import {
   PUBLIC_SHOW_BLOG,
   PUBLIC_SITE_NAME,
 } from "$env/static/public";
-import { getMeta } from "$lib/common/meta";
+import { getMeta } from "$lib/meta";
 
 import Footer from "./footer.svelte";
 import Header from "./header.svelte";
@@ -21,21 +18,6 @@ import Header from "./header.svelte";
 import faviconSVG from "$lib/assets/images/branding/favicon.svg?url";
 import iconPNG192 from "$lib/assets/images/branding/icon-192.png?url";
 import defaultOGImage from "$lib/assets/images/branding/og-default.png?url";
-
-// Workaround for SvelteKit smooth scrolling bug. See:
-// https://github.com/sveltejs/kit/issues/2733#issuecomment-1590212088
-// https://github.com/sveltejs/kit/pull/8724/files
-let scrollBehavior: string;
-beforeNavigate(() => {
-  scrollBehavior = getComputedStyle(document.documentElement).scrollBehavior;
-  document.documentElement.style.scrollBehavior = "auto";
-});
-
-afterNavigate(() => {
-  if (scrollBehavior) {
-    document.documentElement.style.scrollBehavior = scrollBehavior;
-  }
-});
 
 // Some logic is required after route meta is defined (e.g. "use `ogDescription` if specified,
 // otherwise use `description`, otherwise use `defaultDescription`, and then put this into a
@@ -84,7 +66,7 @@ const meta = $derived.by(() =>
 	  - `og:url` is always the canonical URL.
     - `og:title` & `og:description` are usually same as page title & meta description, but if those
 	    are full of SEO keywords, then the og versions could be different.
-    -->
+  -->
 
   <meta property="og:type" content={meta.ogType} />
   <meta property="og:title" content={meta.ogTitle} />
