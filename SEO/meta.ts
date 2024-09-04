@@ -136,9 +136,9 @@ export function getMeta({
 	const canonicalUrl = getCanonicalUrl(url, pageParam);
 
 	const meta: FullMeta = {
+		canonicalUrl,
 		title,
 		description: routeMeta?.description ?? defaultDescription ?? "",
-		canonicalUrl,
 		ogTitle: routeMeta?.ogTitle ?? routeMeta?.title ?? defaultTitle ?? "",
 		ogDescription:
 			routeMeta?.ogDescription ??
